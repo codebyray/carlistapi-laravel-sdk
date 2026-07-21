@@ -1,0 +1,66 @@
+{
+    "name": "codebyray/carlistapi-laravel-sdk",
+    "description": "Laravel SDK for the Car List API automotive, powersports, and VIN decoder endpoints.",
+    "keywords": [
+        "laravel",
+        "vehicle",
+        "automotive",
+        "powersports",
+        "vin",
+        "api",
+        "sdk"
+    ],
+    "homepage": "https://github.com/Codebyray/carlistapi-laravel-sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CodebyRay",
+            "email": "dev@codebyray.com",
+            "homepage": "https://codebyrj.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Codebyray/carlistapi-laravel-sdk/issues",
+        "source": "https://github.com/Codebyray/carlistapi-laravel-sdk"
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/contracts": "^11.0 || ^12.0 || ^13.0",
+        "illuminate/http": "^11.0 || ^12.0 || ^13.0",
+        "illuminate/support": "^11.0 || ^12.0 || ^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0 || ^10.0 || ^11.0",
+        "phpunit/phpunit": "^11.0 || ^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodebyRay\\CarListApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodebyRay\\CarListApi\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CodebyRay\\CarListApi\\CarListApiServiceProvider"
+            ],
+            "aliases": {
+                "CarListApi": "CodebyRay\\CarListApi\\Facades\\CarListApi"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "lint": "find src tests config -name '*.php' -print0 | xargs -0 -n1 php -l"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

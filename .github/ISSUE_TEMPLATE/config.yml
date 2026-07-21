@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Documentation
+    url: https://carlistapi.com/docs
+    about: Read the official documentation before opening an issue.
+
+  - name: Discussions
+    url: https://github.com/Codebyray/carlistapi-laravel-sdk/discussions
+    about: Ask questions or discuss ideas with the community.
+
+  - name: Security Vulnerability
+    url: https://github.com/Codebyray/carlistapi-laravel-sdk/security/advisories/new
+    about: Privately report security vulnerabilities.
