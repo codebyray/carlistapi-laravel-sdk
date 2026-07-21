@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebyRay\CarListApi\Response;
+namespace CodebyRay\CarListApiLaravel\Response;
 
 use Illuminate\Http\Client\Response;
 

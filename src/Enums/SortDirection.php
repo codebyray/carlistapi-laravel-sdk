@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebyRay\CarListApi\Enums;
+namespace CodebyRay\CarListApiLaravel\Enums;
 
 enum SortDirection: string
 {

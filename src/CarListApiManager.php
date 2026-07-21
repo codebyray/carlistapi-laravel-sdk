@@ -1,10 +1,10 @@
 <?php
 
-namespace CodebyRay\CarListApi;
+namespace CodebyRay\CarListApiLaravel;
 
-use CodebyRay\CarListApi\Resources\Automotive;
-use CodebyRay\CarListApi\Resources\Powersports;
-use CodebyRay\CarListApi\Resources\VinDecoder;
+use CodebyRay\CarListApiLaravel\Resources\Automotive;
+use CodebyRay\CarListApiLaravel\Resources\Powersports;
+use CodebyRay\CarListApiLaravel\Resources\VinDecoder;
 use Illuminate\Http\Client\Factory;
 use InvalidArgumentException;
 

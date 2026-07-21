@@ -104,7 +104,7 @@ CAR_LIST_API_USER_AGENT=my-application/1.0
 ## Quick Start
 
 ```php
-use CodebyRay\CarListApi\Facades\CarListApi;
+use CodebyRay\CarListApiLaravel\Facades\CarListApi;
 
 $vehicle = CarListApi::vinDecoder()
     ->decode('1HGCM82633A004352')
@@ -116,7 +116,7 @@ $vehicle = CarListApi::vinDecoder()
 ### Dependency injection
 
 ```php
-use CodebyRay\CarListApi\CarListApiManager;
+use CodebyRay\CarListApiLaravel\CarListApiManager;
 
 final class VehicleController
 {
@@ -132,7 +132,7 @@ final class VehicleController
 ### Facade
 
 ```php
-use CodebyRay\CarListApi\Facades\CarListApi;
+use CodebyRay\CarListApiLaravel\Facades\CarListApi;
 
 $makes = CarListApi::automotive()->makes()->data;
 $models = CarListApi::automotive()->models(2026, 'Toyota')->data;

@@ -1,14 +1,14 @@
 <?php
 
-namespace CodebyRay\CarListApi\Facades;
+namespace CodebyRay\CarListApiLaravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \CodebyRay\CarListApi\Resources\Automotive automotive()
- * @method static \CodebyRay\CarListApi\Resources\Powersports powersports()
- * @method static \CodebyRay\CarListApi\Resources\VinDecoder vinDecoder()
- * @method static \CodebyRay\CarListApi\CarListApiManager withToken(string $token)
+ * @method static \CodebyRay\CarListApiLaravel\Resources\Automotive automotive()
+ * @method static \CodebyRay\CarListApiLaravel\Resources\Powersports powersports()
+ * @method static \CodebyRay\CarListApiLaravel\Resources\VinDecoder vinDecoder()
+ * @method static \CodebyRay\CarListApiLaravel\CarListApiManager withToken(string $token)
  */
 class CarListApi extends Facade
 {

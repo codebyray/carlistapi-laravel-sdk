@@ -1,16 +1,16 @@
 <?php
 
-namespace CodebyRay\CarListApi;
+namespace CodebyRay\CarListApiLaravel;
 
-use CodebyRay\CarListApi\Exceptions\AuthenticationException;
-use CodebyRay\CarListApi\Exceptions\AuthorizationException;
-use CodebyRay\CarListApi\Exceptions\CarListApiException;
-use CodebyRay\CarListApi\Exceptions\NotFoundException;
-use CodebyRay\CarListApi\Exceptions\RateLimitException;
-use CodebyRay\CarListApi\Exceptions\ServerException;
-use CodebyRay\CarListApi\Exceptions\TransportException;
-use CodebyRay\CarListApi\Exceptions\ValidationException;
-use CodebyRay\CarListApi\Response\ApiResponse;
+use CodebyRay\CarListApiLaravel\Exceptions\AuthenticationException;
+use CodebyRay\CarListApiLaravel\Exceptions\AuthorizationException;
+use CodebyRay\CarListApiLaravel\Exceptions\CarListApiException;
+use CodebyRay\CarListApiLaravel\Exceptions\NotFoundException;
+use CodebyRay\CarListApiLaravel\Exceptions\RateLimitException;
+use CodebyRay\CarListApiLaravel\Exceptions\ServerException;
+use CodebyRay\CarListApiLaravel\Exceptions\TransportException;
+use CodebyRay\CarListApiLaravel\Exceptions\ValidationException;
+use CodebyRay\CarListApiLaravel\Response\ApiResponse;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
@@ -78,6 +78,7 @@ final readonly class Client
     private function request(): PendingRequest
     {
         $request = $this->http->acceptJson()->asJson()->withToken($this->token)->withUserAgent($this->userAgent)->timeout($this->timeout)->connectTimeout($this->connectTimeout);
+
         return $this->retryTimes > 0 ? $request->retry($this->retryTimes, $this->retrySleepMs, throw: false) : $request;
     }
 
@@ -86,5 +87,8 @@ final readonly class Client
         return rtrim($this->baseUrl, '/').'/'.trim($this->version, '/').'/'.ltrim($path, '/');
     }
 
-    private function intOrNull(mixed $value): ?int { return is_numeric($value) ? (int) $value : null; }
+    private function intOrNull(mixed $value): ?int
+    {
+        return is_numeric($value) ? (int) $value : null;
+    }
 }

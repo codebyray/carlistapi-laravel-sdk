@@ -1,15 +1,15 @@
 <?php
 
-namespace CodebyRay\CarListApi\Tests;
+namespace CodebyRay\CarListApiLaravel\Tests;
 
-use CodebyRay\CarListApi\CarListApiManager;
-use CodebyRay\CarListApi\Exceptions\AuthenticationException;
-use CodebyRay\CarListApi\Exceptions\AuthorizationException;
-use CodebyRay\CarListApi\Exceptions\CarListApiException;
-use CodebyRay\CarListApi\Exceptions\NotFoundException;
-use CodebyRay\CarListApi\Exceptions\RateLimitException;
-use CodebyRay\CarListApi\Exceptions\ServerException;
-use CodebyRay\CarListApi\Exceptions\ValidationException;
+use CodebyRay\CarListApiLaravel\CarListApiManager;
+use CodebyRay\CarListApiLaravel\Exceptions\AuthenticationException;
+use CodebyRay\CarListApiLaravel\Exceptions\AuthorizationException;
+use CodebyRay\CarListApiLaravel\Exceptions\CarListApiException;
+use CodebyRay\CarListApiLaravel\Exceptions\NotFoundException;
+use CodebyRay\CarListApiLaravel\Exceptions\RateLimitException;
+use CodebyRay\CarListApiLaravel\Exceptions\ServerException;
+use CodebyRay\CarListApiLaravel\Exceptions\ValidationException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\DataProvider;

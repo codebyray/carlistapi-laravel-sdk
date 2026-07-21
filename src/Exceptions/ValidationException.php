@@ -1,5 +1,5 @@
 <?php
 
-namespace CodebyRay\CarListApi\Exceptions;
+namespace CodebyRay\CarListApiLaravel\Exceptions;
 
 class ValidationException extends CarListApiException {}

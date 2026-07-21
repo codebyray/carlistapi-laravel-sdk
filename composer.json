@@ -36,21 +36,21 @@
     },
     "autoload": {
         "psr-4": {
-            "CodebyRay\\CarListApi\\": "src/"
+            "CodebyRay\\CarListApiLaravel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CodebyRay\\CarListApi\\Tests\\": "tests/"
+            "CodebyRay\\CarListApiLaravel\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "CodebyRay\\CarListApi\\CarListApiServiceProvider"
+                "CodebyRay\\CarListApiLaravel\\CarListApiServiceProvider"
             ],
             "aliases": {
-                "CarListApi": "CodebyRay\\CarListApi\\Facades\\CarListApi"
+                "CarListApi": "CodebyRay\\CarListApiLaravel\\Facades\\CarListApi"
             }
         }
     },

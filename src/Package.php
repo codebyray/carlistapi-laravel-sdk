@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebyRay\CarListApi;
+namespace CodebyRay\CarListApiLaravel;
 
 use Composer\InstalledVersions;
 use Throwable;

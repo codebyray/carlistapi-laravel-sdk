@@ -1,9 +1,9 @@
 <?php
 
-namespace CodebyRay\CarListApi\Resources;
+namespace CodebyRay\CarListApiLaravel\Resources;
 
-use CodebyRay\CarListApi\Client;
-use CodebyRay\CarListApi\Enums\SortDirection;
+use CodebyRay\CarListApiLaravel\Client;
+use CodebyRay\CarListApiLaravel\Enums\SortDirection;
 
 abstract readonly class Resource
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace CodebyRay\CarListApi\Resources;
+namespace CodebyRay\CarListApiLaravel\Resources;
 
-use CodebyRay\CarListApi\Response\ApiResponse;
+use CodebyRay\CarListApiLaravel\Response\ApiResponse;
 
 final readonly class VinDecoder extends Resource
 {

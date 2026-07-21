@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebyRay\CarListApi;
+namespace CodebyRay\CarListApiLaravel;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Client\Factory;
