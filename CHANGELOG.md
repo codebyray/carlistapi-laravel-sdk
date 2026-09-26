@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Retry only connection failures and HTTP 5xx responses, with retry counts
+  representing additional attempts.
+- Preserve Laravel validation error messages in typed exceptions.
+
 ## v0.1.0
 
 - Initial release
