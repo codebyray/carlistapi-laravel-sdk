@@ -14,6 +14,7 @@ use CodebyRay\CarListApiLaravel\Response\ApiResponse;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Throwable;
 
@@ -59,9 +60,7 @@ final readonly class Client
         }
 
         $payload = $response->json();
-        $message = is_array($payload) && is_string($payload['error'] ?? null)
-            ? $payload['error']
-            : 'Car List API request failed with HTTP '.$response->status().'.';
+        $message = $this->message($payload, $response->status());
 
         throw match ($response->status()) {
             401 => new AuthenticationException($message, 401),
@@ -79,7 +78,15 @@ final readonly class Client
     {
         $request = $this->http->acceptJson()->asJson()->withToken($this->token)->withUserAgent($this->userAgent)->timeout($this->timeout)->connectTimeout($this->connectTimeout);
 
-        return $this->retryTimes > 0 ? $request->retry($this->retryTimes, $this->retrySleepMs, throw: false) : $request;
+        return $this->retryTimes > 0
+            ? $request->retry(
+                $this->retryTimes + 1,
+                $this->retrySleepMs,
+                static fn (Throwable $e): bool => $e instanceof ConnectionException
+                    || ($e instanceof RequestException && $e->response->serverError()),
+                throw: false,
+            )
+            : $request;
     }
 
     private function url(string $path): string
@@ -90,5 +97,18 @@ final readonly class Client
     private function intOrNull(mixed $value): ?int
     {
         return is_numeric($value) ? (int) $value : null;
+    }
+
+    private function message(mixed $payload, int $status): string
+    {
+        if (is_array($payload)) {
+            foreach (['message', 'error'] as $key) {
+                if (is_string($payload[$key] ?? null) && trim($payload[$key]) !== '') {
+                    return $payload[$key];
+                }
+            }
+        }
+
+        return 'Car List API request failed with HTTP '.$status.'.';
     }
 }

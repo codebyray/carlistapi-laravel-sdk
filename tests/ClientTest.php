@@ -119,6 +119,51 @@ final class ClientTest extends TestCase
         }
     }
 
+    public static function permanentErrorProvider(): array
+    {
+        return [
+            'unauthorized' => [401],
+            'validation' => [422],
+            'rate limited' => [429],
+        ];
+    }
+
+    #[DataProvider('permanentErrorProvider')]
+    public function test_it_does_not_retry_permanent_http_errors(int $status): void
+    {
+        config()->set('carlistapi.retry', ['times' => 2, 'sleep_ms' => 0]);
+        Http::fake(['example.test/*' => Http::response(['error' => 'Request rejected.'], $status)]);
+
+        try {
+            app(CarListApiManager::class)->automotive()->years();
+            self::fail('Expected an API exception.');
+        } catch (CarListApiException $e) {
+            self::assertSame($status, $e->getCode());
+            Http::assertSentCount(1);
+        }
+    }
+
+    public function test_it_retries_transient_server_errors(): void
+    {
+        config()->set('carlistapi.retry', ['times' => 1, 'sleep_ms' => 0]);
+        Http::fakeSequence()->push(['error' => 'Temporarily unavailable.'], 503)->push(['year' => 2026], 200);
+
+        $response = app(CarListApiManager::class)->automotive()->years();
+
+        self::assertSame(['year' => 2026], $response->data);
+        Http::assertSentCount(2);
+    }
+
+    public function test_it_preserves_laravel_validation_messages(): void
+    {
+        Http::fake(['example.test/*' => Http::response(['message' => 'The vin field is invalid.'], 422)]);
+
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessage('The vin field is invalid.');
+
+        app(CarListApiManager::class)->automotive()->years();
+    }
+
     public function test_it_encodes_path_segments(): void
     {
         Http::fake(['example.test/*' => Http::response([], 200)]);

@@ -87,12 +87,16 @@ CAR_LIST_API_RETRY_TIMES=2
 CAR_LIST_API_RETRY_SLEEP_MS=200
 ```
 
+`CAR_LIST_API_RETRY_TIMES` counts additional attempts after the first request.
+Only connection failures and HTTP 5xx responses are retried; quota and other
+client errors are returned immediately.
+
 ### User Agent
 
 By default, requests include a `User-Agent` identifying the SDK and its version, for example:
 
 ```text
-codebyray/carlistapi-laravel-sdk/1.2.0
+codebyray/carlistapi-laravel-sdk/<installed-version>
 ```
 
 You can override it by setting:
