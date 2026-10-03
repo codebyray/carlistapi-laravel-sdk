@@ -92,6 +92,9 @@ Only GET requests are retried after connection failures or HTTP 5xx responses;
 quota and other client errors are returned immediately. VIN decode POST requests
 are sent once because a successful, quota-counted decode may have a lost response.
 
+If upgrading from v0.1.x, handle a failed VIN decode in your application only
+when another quota-counted attempt is acceptable.
+
 ### User Agent
 
 By default, requests include a `User-Agent` identifying the SDK and its version, for example:
