@@ -35,20 +35,20 @@ final readonly class Client
     /** @param array<string, scalar|null> $query */
     public function get(string $path, array $query = []): ApiResponse
     {
-        return $this->send(fn (PendingRequest $request): Response => $request->get($this->url($path), $query));
+        return $this->send(fn (PendingRequest $request): Response => $request->get($this->url($path), $query), retryable: true);
     }
 
     /** @param array<string, mixed> $data */
     public function post(string $path, array $data = []): ApiResponse
     {
-        return $this->send(fn (PendingRequest $request): Response => $request->post($this->url($path), $data));
+        return $this->send(fn (PendingRequest $request): Response => $request->post($this->url($path), $data), retryable: false);
     }
 
     /** @param callable(PendingRequest): Response $callback */
-    private function send(callable $callback): ApiResponse
+    private function send(callable $callback, bool $retryable): ApiResponse
     {
         try {
-            $response = $callback($this->request());
+            $response = $callback($this->request($retryable));
         } catch (ConnectionException $e) {
             throw new TransportException('Unable to connect to the Car List API.', 0, $e);
         } catch (Throwable $e) {
@@ -74,11 +74,11 @@ final readonly class Client
         };
     }
 
-    private function request(): PendingRequest
+    private function request(bool $retryable): PendingRequest
     {
         $request = $this->http->acceptJson()->asJson()->withToken($this->token)->withUserAgent($this->userAgent)->timeout($this->timeout)->connectTimeout($this->connectTimeout);
 
-        return $this->retryTimes > 0
+        return $retryable && $this->retryTimes > 0
             ? $request->retry(
                 $this->retryTimes + 1,
                 $this->retrySleepMs,

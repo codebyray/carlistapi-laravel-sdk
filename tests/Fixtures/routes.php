@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Public resource methods and paths from the Car List API v1 endpoint reference.
+ *
+ * @return array<string, array{string, string, array<int, mixed>, string, string}>
+ */
+return [
+    'automotive years' => ['automotive', 'years', [], 'car-data/get-years/asc', 'GET'],
+    'automotive body styles' => ['automotive', 'bodyStyles', [], 'car-data/get-body-styles/asc', 'GET'],
+    'automotive years by body style' => ['automotive', 'yearsByBodyStyle', ['Sport Utility'], 'car-data/get-years-by-body-style/Sport%20Utility/asc', 'GET'],
+    'automotive makes by body style' => ['automotive', 'makesByBodyStyle', ['Sport Utility'], 'car-data/get-makes-by-body-style/Sport%20Utility/asc', 'GET'],
+    'automotive makes by body style and year' => ['automotive', 'makesByBodyStyleAndYear', ['Sport Utility', 2026], 'car-data/get-makes-by-body-style-and-year/Sport%20Utility/2026/asc', 'GET'],
+    'automotive all makes' => ['automotive', 'makes', [], 'car-data/all-makes/asc', 'GET'],
+    'automotive make logo' => ['automotive', 'makeLogo', ['Land Rover'], 'car-data/get-make-logo/Land%20Rover', 'GET'],
+    'automotive details' => ['automotive', 'details', ['vehicle-uuid'], 'car-data/get-details/vehicle-uuid', 'GET'],
+    'automotive makes by year' => ['automotive', 'makesByYear', [2026], 'car-data/get-makes/2026/asc', 'GET'],
+    'automotive models' => ['automotive', 'models', [2026, 'Land Rover'], 'car-data/get-models/2026/Land%20Rover/asc', 'GET'],
+    'automotive years range' => ['automotive', 'yearsRange', [2020, 2026], 'car-data/get-years/range/2020/2026/asc', 'GET'],
+    'automotive vehicle id' => ['automotive', 'vehicleId', [2026, 'Land Rover', 'Defender', 'Sport Utility', '2.0L Turbo'], 'car-data/get-vehicle-id/2026/Land%20Rover/Defender/Sport%20Utility/2.0L%20Turbo', 'GET'],
+    'automotive trims' => ['automotive', 'trims', [2026, 'Land Rover', 'Defender'], 'car-data/get-trims/2026/Land%20Rover/Defender/asc', 'GET'],
+    'automotive makes by year range' => ['automotive', 'makesByYearRange', [2020, 2026], 'car-data/get-makes-by-year/range/2020/2026/asc', 'GET'],
+    'automotive engines' => ['automotive', 'engines', [2026, 'Land Rover', 'Defender', 'Sport Utility'], 'car-data/get-engines/2026/Land%20Rover/Defender/Sport%20Utility/asc', 'GET'],
+    'automotive drive types' => ['automotive', 'driveTypes', [], 'car-data/get-drive-types/asc', 'GET'],
+    'automotive fuel types' => ['automotive', 'fuelTypes', [], 'car-data/get-fuel-types/asc', 'GET'],
+    'automotive makes by fuel type' => ['automotive', 'makesByFuelType', ['GAS'], 'car-data/get-fuel-types/get-makes/GAS/asc', 'GET'],
+    'automotive models by fuel type and make' => ['automotive', 'modelsByFuelTypeAndMake', ['GAS', 'Land Rover'], 'car-data/get-fuel-types/get-models/GAS/Land%20Rover/asc', 'GET'],
+    'automotive door counts' => ['automotive', 'numberOfDoors', [], 'car-data/get-number-doors/asc', 'GET'],
+    'automotive makes by drive type' => ['automotive', 'makesByDriveType', ['AWD'], 'car-data/drive-types/get-makes/AWD/asc', 'GET'],
+    'automotive models by drive type and make' => ['automotive', 'modelsByDriveTypeAndMake', ['AWD', 'Land Rover'], 'car-data/drive-types/get-models/AWD/Land%20Rover/asc', 'GET'],
+    'powersports years' => ['powersports', 'years', [], 'powersports-data/get-years/asc', 'GET'],
+    'powersports all makes' => ['powersports', 'makes', [], 'powersports-data/all-makes/asc', 'GET'],
+    'powersports years range' => ['powersports', 'yearsRange', [2020, 2026], 'powersports-data/get-years/range/2020/2026/asc', 'GET'],
+    'powersports vehicle id' => ['powersports', 'vehicleId', [2026, 'Can-Am', 'Outlander', 'Trail Edition'], 'powersports-data/get-vehicle-id/2026/Can-Am/Outlander/Trail%20Edition', 'GET'],
+    'powersports make logo' => ['powersports', 'makeLogo', ['Can-Am'], 'powersports-data/get-make-logo/Can-Am', 'GET'],
+    'powersports details' => ['powersports', 'details', ['vehicle-uuid'], 'powersports-data/get-details/vehicle-uuid', 'GET'],
+    'powersports makes by year' => ['powersports', 'makesByYear', [2026], 'powersports-data/get-makes/2026/asc', 'GET'],
+    'powersports makes by year range' => ['powersports', 'makesByYearRange', [2020, 2026], 'powersports-data/get-makes-by-year/range/2020/2026/asc', 'GET'],
+    'powersports models' => ['powersports', 'models', [2026, 'Can-Am'], 'powersports-data/get-models/2026/Can-Am/asc', 'GET'],
+    'powersports sub-models' => ['powersports', 'subModels', [2026, 'Can-Am', 'Outlander'], 'powersports-data/get-sub-models/2026/Can-Am/Outlander/asc', 'GET'],
+    'powersports types' => ['powersports', 'types', [], 'powersports-data/get-types/asc', 'GET'],
+    'powersports years by type' => ['powersports', 'yearsByType', ['ATV / Utility'], 'powersports-data/type/get-years/ATV%20%2F%20Utility/asc', 'GET'],
+    'powersports years range by type' => ['powersports', 'yearsRangeByType', ['ATV / Utility', 2020, 2026], 'powersports-data/type/get-years/range/ATV%20%2F%20Utility/2020/2026/desc', 'GET'],
+    'powersports makes by type' => ['powersports', 'makesByType', ['ATV / Utility'], 'powersports-data/type/get-makes/ATV%20%2F%20Utility/asc', 'GET'],
+    'powersports makes by year range and type' => ['powersports', 'makesByYearRangeAndType', ['ATV / Utility', 2020, 2026], 'powersports-data/type/get-makes-by-year/range/ATV%20%2F%20Utility/2020/2026/asc', 'GET'],
+    'powersports makes by year and type' => ['powersports', 'makesByYearAndType', ['ATV / Utility', 2026], 'powersports-data/type/get-makes-by-year/ATV%20%2F%20Utility/2026/asc', 'GET'],
+    'powersports models by year make and type' => ['powersports', 'modelsByYearMakeAndType', ['ATV / Utility', 2026, 'Can-Am'], 'powersports-data/type/get-models-by-year-make/ATV%20%2F%20Utility/2026/Can-Am/asc', 'GET'],
+    'powersports sub-models by year make model and type' => ['powersports', 'subModelsByYearMakeModelAndType', ['ATV / Utility', 2026, 'Can-Am', 'Outlander'], 'powersports-data/type/get-sub-models-by-year-make/ATV%20%2F%20Utility/2026/Can-Am/Outlander/asc', 'GET'],
+    'vin decode' => ['vinDecoder', 'decode', ['1HGCM82633A004352'], 'vin-decoder/decode', 'POST'],
+];
