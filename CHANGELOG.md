@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Retry transient connection and HTTP 5xx failures only for GET requests. VIN decode POST requests are sent once to avoid a second quota-counted decode when a response is lost.
+- Cover every public resource method against the documented API v1 route and HTTP method.
+- Verify VIN decode is not retried after connection failures or HTTP 5xx responses.
+
+## v0.1.1 - 2026-09-25
+
 - Retry only connection failures and HTTP 5xx responses, with retry counts
   representing additional attempts.
 - Preserve Laravel validation error messages in typed exceptions.

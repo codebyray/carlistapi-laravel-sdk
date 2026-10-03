@@ -9,6 +9,7 @@ use CodebyRay\CarListApiLaravel\Exceptions\CarListApiException;
 use CodebyRay\CarListApiLaravel\Exceptions\NotFoundException;
 use CodebyRay\CarListApiLaravel\Exceptions\RateLimitException;
 use CodebyRay\CarListApiLaravel\Exceptions\ServerException;
+use CodebyRay\CarListApiLaravel\Exceptions\TransportException;
 use CodebyRay\CarListApiLaravel\Exceptions\ValidationException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
@@ -152,6 +153,44 @@ final class ClientTest extends TestCase
 
         self::assertSame(['year' => 2026], $response->data);
         Http::assertSentCount(2);
+    }
+
+    public function test_it_retries_get_after_a_connection_failure(): void
+    {
+        config()->set('carlistapi.retry', ['times' => 1, 'sleep_ms' => 0]);
+        Http::fakeSequence()->pushFailedConnection()->push(['year' => 2026], 200);
+
+        $response = app(CarListApiManager::class)->automotive()->years();
+
+        self::assertSame(['year' => 2026], $response->data);
+        Http::assertSentCount(2);
+    }
+
+    public function test_it_does_not_retry_vin_decode_after_a_server_error(): void
+    {
+        config()->set('carlistapi.retry', ['times' => 2, 'sleep_ms' => 0]);
+        Http::fake(['example.test/*' => Http::response(['error' => 'Unavailable.'], 503)]);
+
+        try {
+            app(CarListApiManager::class)->vinDecoder()->decode('1HGCM82633A004352');
+            self::fail('Expected a server exception.');
+        } catch (ServerException $e) {
+            self::assertSame(503, $e->getCode());
+            Http::assertSentCount(1);
+        }
+    }
+
+    public function test_it_does_not_retry_vin_decode_after_a_connection_failure(): void
+    {
+        config()->set('carlistapi.retry', ['times' => 2, 'sleep_ms' => 0]);
+        Http::fake(['example.test/*' => Http::failedConnection()]);
+
+        try {
+            app(CarListApiManager::class)->vinDecoder()->decode('1HGCM82633A004352');
+            self::fail('Expected a transport exception.');
+        } catch (TransportException $e) {
+            Http::assertSentCount(1);
+        }
     }
 
     public function test_it_preserves_laravel_validation_messages(): void

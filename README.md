@@ -88,8 +88,9 @@ CAR_LIST_API_RETRY_SLEEP_MS=200
 ```
 
 `CAR_LIST_API_RETRY_TIMES` counts additional attempts after the first request.
-Only connection failures and HTTP 5xx responses are retried; quota and other
-client errors are returned immediately.
+Only GET requests are retried after connection failures or HTTP 5xx responses;
+quota and other client errors are returned immediately. VIN decode POST requests
+are sent once because a successful, quota-counted decode may have a lost response.
 
 ### User Agent
 
